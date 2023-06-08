@@ -15,7 +15,7 @@ Welcome to the README page for the **Educational ILR Data Processing and Payment
 
 The Educational ILR Data Processing and Payment File Generation project is developed in Java to streamline the handling of educational ILR data and automate the creation of payment files. This software platform aims to simplify the process of managing and processing student-related information for educational institutions, such as colleges and training providers.
 
-By leveraging the power of this open-source software, educational institutions can efficiently process ILR data and generate payment files, enabling them to meet compliance requirements, facilitate accurate reporting, and simplify financial transactions with relevant funding bodies.
+By leveraging the power of this open-source software, Local Authorities can efficiently process ILR data and generate payment files, enabling them to meet compliance requirements, facilitate accurate reporting, and simplify financial transactions with relevant funding bodies.
 
 ## Features
 
@@ -36,7 +36,7 @@ By leveraging the power of this open-source software, educational institutions c
 To install and set up the Educational ILR Data Processing and Payment File Generation software, follow these steps:
 
 1. **Prerequisites**: Ensure that you have the following prerequisites installed on your system:
-   - [Java Development Kit (JDK)](https://www.oracle.com/java/technologies/javase-jdk11-downloads.html) (version 11 or later)
+   - [Java Development Kit (JDK)](https://www.oracle.com/java/technologies/javase-jdk17-downloads.html) (version 17 or later)
    - [Maven](https://maven.apache.org/) build tool
 
 2. **Clone the Repository**: Open a terminal and clone the project repository using the following command:
