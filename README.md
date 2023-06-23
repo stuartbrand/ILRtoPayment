@@ -31,36 +31,82 @@ By leveraging the power of this open-source software, Local Authorities can effi
 
 - **Open Source**: The project is open-source, enabling the community to contribute, improve, and extend its functionality.
 
-## Installation
+## Project Overview
 
-To install and set up the Educational ILR Data Processing and Payment File Generation software, follow these steps:
+This project aims to replace an existing application with an AWS-based solution for processing ILR educational data. The goal is to demonstrate the end-to-end process and the replacement of each system component. The existing system uses SQL scripts to process data and generates a CSV payment file from the enrollments.
 
-1. **Prerequisites**: Ensure that you have the following prerequisites installed on your system:
-   - [Java Development Kit (JDK)](https://www.oracle.com/java/technologies/javase-jdk17-downloads.html) (version 17 or later)
-   - [Maven](https://maven.apache.org/) build tool
+### System Components
 
-2. **Clone the Repository**: Open a terminal and clone the project repository using the following command:
-   ```bash
-   git clone https://github.com/stuartbrand/ILRtoPayment.git
-   ```
+The system consists of the following components, the bullet points are what could be done in this project to replace them:
 
-3. **Build the Project**: Navigate to the project directory and build the project using Maven:
-   ```bash
-   mvn clean install
-   ```
+1. **CSV Input File (Occupancy Report):**
+   - The occupancy report, in CSV format, serves as the input file for data processing.
+   - Store this file in an Amazon S3 bucket to facilitate data ingestion and processing.
 
-4. **Configuration**: Modify the configuration files (`config.properties` or `application.yml`) to specify your environment-specific settings and preferences.
+2. **Data Ingestion and Error Checking:**
+   - Set up an AWS Lambda function triggered by new file uploads to the S3 bucket.
+   - This Lambda function will handle error checking and data insertion.
+   - Utilize the AWS SDK libraries to parse the CSV file, validate its contents, and perform error checks.
+   - Log or notify relevant parties about any identified errors.
+   - Insert the validated data into an Amazon RDS or Amazon Aurora database table.
 
-5. **Database Setup**: If the software requires a database, provide instructions on how to set it up, including the necessary steps for schema creation and migration.
+3. **Data Normalization:**
+   - Create an AWS Glue job or an AWS Lambda function responsible for normalizing the data in the import table.
+   - Apply the necessary transformations to ensure the data is in the desired format for further processing.
 
-6. **Run the Application**: Execute the following command to run the application:
-   ```bash
-   java -jar target/application.jar
-   ```
+4. **Enrollment Identification and Contract Matching:**
+   - Process each row of the normalized data using AWS Glue, AWS Lambda, or a combination of both.
+   - Retrieve contract information from another table using AWS Glue's data catalog or by directly querying the table from the Lambda function.
+   - Match each enrollment row with the appropriate contract based on predefined rules.
 
-## Usage
+5. **Payment Determination:**
+   - Query the rules table in your database using AWS Glue or Lambda to determine if each enrollment should be paid.
+   - Apply the rules and update the data accordingly, marking enrollments as paid or unpaid.
 
-Explain how users can use the software platform to process ILR data and generate payment files. Provide examples, code snippets, or command-line instructions to illustrate the process.
+6. **Output Generation:**
+   - Utilize AWS Glue or a Lambda function to generate the output for the payment file.
+   - Write the payment data to a new table in your database, which will be used for payment file generation and reporting.
+
+7. **Payment File Creation and Reporting:**
+   - Implement a Lambda function or an AWS Glue job to generate the payment file from the data in the output table.
+   - Write the payment file to an appropriate location, such as another S3 bucket or an external system.
+   - Integrate with Amazon QuickSight to create reports based on the processed data. QuickSight can connect to your database directly or consume data from a file stored in S3.
+
+## Getting Started
+
+To get started with this project, follow these steps:
+
+1. Set up an AWS account if you don't have one already.
+2. Create an S3 bucket to store the CSV input file and the generated payment file.
+3. Configure AWS Lambda functions for data ingestion, error checking, data normalization, enrollment identification, payment determination, and output generation.
+4. Set up an Amazon RDS or Amazon Aurora database to store the data.
+5. Create the necessary tables in the database for import, output, contract rules, and any other required data.
+6. Populate the contract rules table with the relevant data.
+7. Deploy the code for each Lambda function or Glue job using the AWS Console or the AWS CLI.
+8. Test the system by uploading the occupancy report CSV file to the designated S3 bucket.
+9. Verify that the data processing and payment file generation occur as expected.
+10. Connect Amazon QuickSight to the processed data to create reports and visualizations.
+
+## Security Considerations
+
+Ensure that appropriate security measures are implemented throughout the system, such as:
+
+- Configuring IAM roles and policies to grant the necessary permissions to AWS resources.
+- Implementing encryption at rest and in transit for sensitive data.
+- Securing access to the AWS services and resources through VPC configurations, security groups, and network ACLs.
+- Following AWS security best practices and guidelines to protect against common security threats.
+
+## Scalability and Performance
+
+Consider the scalability and performance requirements of your application:
+
+- Configure AWS resources, such as RDS or Aurora, to handle the expected data volume and processing load.
+- Monitor the system's performance using AWS CloudWatch and set up appropriate alarms to ensure it operates within desired thresholds.
+- Implement autoscaling mechanisms where applicable to handle fluctuations in processing demands.
+
+## Conclusion
+
+By following the outlined steps and leveraging AWS services, you can gradually replace each part of the existing system with a robust and scalable AWS-based solution.
 
 ## Contributing
 
@@ -69,9 +115,7 @@ We welcome contributions from the community to enhance the Educational ILR Data 
 1. Fork the repository on GitHub.
 2. Create a new branch for your feature or bug fix.
 3. Commit your changes with clear and descriptive messages.
-4. Push your
-
- changes to your forked repository.
+4. Push your changes to your forked repository.
 5. Submit a pull request, explaining the changes you have made.
 
 ## License
