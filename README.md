@@ -2,15 +2,6 @@
 
 Welcome to the README page for the **Educational ILR Data Processing and Payment File Generation** project. This open-source software platform aims to provide a solution for processing educational Individualised Learner Record (ILR) data and generating payment files. This document will guide you through the essential information about the project, including its purpose, features, installation instructions, and how you can contribute.
 
-## Table of Contents
-
-- [Introduction](#introduction)
-- [Features](#features)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Contributing](#contributing)
-- [License](#license)
-
 ## Introduction
 
 The Educational ILR Data Processing and Payment File Generation project is developed in Java to streamline the handling of educational ILR data and automate the creation of payment files. In collaboration with the West Midlands Combined Authority and Amazon Web Services and their Solutions Incubator Team, this software platform aims to simplify the process of managing and processing student-related information for educational institutions, such as colleges and training providers.
